@@ -73,14 +73,17 @@ export default function Products() {
   const [productsPerPage] = useState(10);
   const [loading, setLoading] = useState(true);
   const [isAddProductDialogOpen, setIsAddProductDialogOpen] = useState(false);
-  const [selectedProductId, setSelectedProductId] = useState<number | null>(null);
+  const [selectedProductId, setSelectedProductId] = useState<number | null>(
+    null
+  );
   const [productName, setProductName] = useState("");
   const [productDescription, setProductDescription] = useState("");
   const [productPrice, setProductPrice] = useState(0);
   const [productInStock, setProductInStock] = useState(0);
   const [productCategory, setProductCategory] = useState("");
   const [isEditProductDialogOpen, setIsEditProductDialogOpen] = useState(false);
-  const [isDeleteConfirmationOpen, setIsDeleteConfirmationOpen] = useState(false);
+  const [isDeleteConfirmationOpen, setIsDeleteConfirmationOpen] =
+    useState(false);
   const [productToDelete, setProductToDelete] = useState<Product | null>(null);
 
   const resetSelectedProduct = () => {
@@ -120,7 +123,14 @@ export default function Products() {
     } catch (error) {
       console.error("Error adding product:", error);
     }
-  }, [productName, productDescription, productPrice, productInStock, productCategory, products]);
+  }, [
+    productName,
+    productDescription,
+    productPrice,
+    productInStock,
+    productCategory,
+    products,
+  ]);
 
   const handleEditProduct = useCallback(async () => {
     if (!selectedProductId) return;
@@ -144,7 +154,9 @@ export default function Products() {
       if (response.ok) {
         const updatedProductFromServer = await response.json();
         setProducts(
-          products.map((p) => (p.id === updatedProductFromServer.id ? updatedProductFromServer : p))
+          products.map((p) =>
+            p.id === updatedProductFromServer.id ? updatedProductFromServer : p
+          )
         );
         setIsEditProductDialogOpen(false);
         resetSelectedProduct();
@@ -154,7 +166,15 @@ export default function Products() {
     } catch (error) {
       console.error("Error updating product:", error);
     }
-  }, [selectedProductId, productName, productDescription, productPrice, productInStock, productCategory, products]);
+  }, [
+    selectedProductId,
+    productName,
+    productDescription,
+    productPrice,
+    productInStock,
+    productCategory,
+    products,
+  ]);
 
   const handleDeleteProduct = useCallback(async () => {
     if (!productToDelete) return;
@@ -168,6 +188,7 @@ export default function Products() {
         setIsDeleteConfirmationOpen(false);
         setProductToDelete(null);
       } else {
+        console.log(response);
         console.error("Failed to delete product");
       }
     } catch (error) {
@@ -353,7 +374,7 @@ export default function Products() {
                       {product.name}
                     </TableCell>
                     <TableCell>{product.description}</TableCell>
-                    <TableCell>${product.price.toFixed(2)}</TableCell>
+                    <TableCell>₹{product.price.toFixed(2)}</TableCell>
                     <TableCell>{product.in_stock}</TableCell>
                     <TableCell>
                       <div className="flex items-center gap-2">
@@ -392,7 +413,27 @@ export default function Products() {
             </Table>
           </div>
         </CardContent>
-        <CardFooter></CardFooter>
+        <CardFooter className="flex justify-between items-center">
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => handlePageChange(currentPage - 1)}
+            disabled={currentPage === 1}
+          >
+            Previous
+          </Button>
+          <span className="text-sm">
+            Page {currentPage} of {totalPages}
+          </span>
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => handlePageChange(currentPage + 1)}
+            disabled={currentPage === totalPages}
+          >
+            Next
+          </Button>
+        </CardFooter>
       </Card>
       <Dialog
         open={isAddProductDialogOpen || isEditProductDialogOpen}
@@ -474,9 +515,50 @@ export default function Products() {
                   <SelectValue placeholder="Select a category" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="electronics">Electronics</SelectItem>
+                  <SelectItem value="food">Food</SelectItem>
+                  <SelectItem value="water-beverages">
+                    Water & Beverages
+                  </SelectItem>
+                  <SelectItem value="hygiene-kits">Hygiene Kits</SelectItem>
+                  <SelectItem value="medical-supplies">
+                    Medical Supplies
+                  </SelectItem>
                   <SelectItem value="clothing">Clothing</SelectItem>
+                  <SelectItem value="footwear">Footwear</SelectItem>
+                  <SelectItem value="blankets-bedding">
+                    Blankets & Bedding
+                  </SelectItem>
+                  <SelectItem value="tents">Tents & Tarpaulins</SelectItem>
                   <SelectItem value="books">Books</SelectItem>
+                  <SelectItem value="stationery">Stationery</SelectItem>
+                  <SelectItem value="bags-backpacks">
+                    Bags & Backpacks
+                  </SelectItem>
+                  <SelectItem value="digital-devices">
+                    Digital Devices
+                  </SelectItem>
+                  <SelectItem value="cooking-supplies">
+                    Cooking Supplies
+                  </SelectItem>
+                  <SelectItem value="cleaning-supplies">
+                    Cleaning Supplies
+                  </SelectItem>
+                  <SelectItem value="lighting">Lighting</SelectItem>
+                  <SelectItem value="emergency-kits">Emergency Kits</SelectItem>
+                  <SelectItem value="rescue-equipment">
+                    Rescue Equipment
+                  </SelectItem>
+                  <SelectItem value="shelter-materials">
+                    Shelter Materials
+                  </SelectItem>
+                  <SelectItem value="toys">Toys</SelectItem>
+                  <SelectItem value="sports-equipment">
+                    Sports Equipment
+                  </SelectItem>
+                  <SelectItem value="art-craft">
+                    Art & Craft Supplies
+                  </SelectItem>
+                  <SelectItem value="electronics">Electronics</SelectItem>
                   <SelectItem value="home">Home</SelectItem>
                 </SelectContent>
               </Select>

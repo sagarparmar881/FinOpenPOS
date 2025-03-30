@@ -93,6 +93,7 @@ export default function CustomersPage() {
           throw new Error("Failed to fetch customers");
         }
         const data = await response.json();
+        console.log(data);
         setCustomers(data);
       } catch (error) {
         setError((error as Error).message);

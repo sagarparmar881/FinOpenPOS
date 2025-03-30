@@ -1,4 +1,4 @@
-import { signup, login } from "./actions";
+import { signup } from "./actions";
 /**
  * v0 by Vercel.
  * @see https://v0.dev/t/y71wwxpKfsO
@@ -7,19 +7,18 @@ import { signup, login } from "./actions";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
-import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { MountainIcon } from "lucide-react";
 
-export default function LoginPage() {
+export default function SignUpPage() {
   return (
     <div className="flex min-h-screen flex-col items-center justify-center bg-background">
       <div className="mx-auto w-full max-w-md space-y-6">
         <div className="flex flex-col items-center space-y-2">
           <MountainIcon className="h-10 w-10" />
-          <h2 className="text-2xl font-bold">Welcome back</h2>
+          <h2 className="text-2xl font-bold">Welcome!</h2>
           <p className="text-muted-foreground">
-            Enter your email and password to sign in.
+            Enter your email and password to sign up.
           </p>
         </div>
         <Card>
@@ -39,23 +38,8 @@ export default function LoginPage() {
                 <Label htmlFor="password">Password</Label>
                 <Input id="password" name="password" type="password" required />
               </div>
+              <Button formAction={signup}>Sign up</Button>
             </CardContent>
-            <CardFooter className="flex justify-between">
-              <Link
-                href="#"
-                className="text-sm text-muted-foreground"
-                prefetch={false}
-              >
-                Forgot password?
-              </Link>
-              <Button formAction={login}>Log in</Button>
-              <Link
-                href="/signup"
-                className="text-black-500 hover:underline font-bold"
-              >
-                Sign Up
-              </Link>
-            </CardFooter>
           </form>
         </Card>
       </div>

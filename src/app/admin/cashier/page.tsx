@@ -187,7 +187,7 @@ export default function Cashier() {
                     <Badge variant={transaction.type}>{transaction.type}</Badge>
                   </TableCell>
                   <TableCell>{formatDate(transaction.created_at)}</TableCell>
-                  <TableCell>${transaction.amount.toFixed(2)}</TableCell>
+                  <TableCell>₹{transaction.amount.toFixed(2)}</TableCell>
                   <TableCell>
                     <Badge
                       variant={

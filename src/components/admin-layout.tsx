@@ -2,6 +2,8 @@
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { useRouter } from "next/navigation";
+
 import {
   DropdownMenu,
   DropdownMenuTrigger,
@@ -22,12 +24,14 @@ import {
   Package2Icon,
   SearchIcon,
   LayoutDashboardIcon,
-  DollarSignIcon,
   PackageIcon,
   ShoppingCartIcon,
   UsersIcon,
   ShoppingBagIcon,
+  IndianRupeeIcon
 } from "lucide-react";
+
+import { createClient } from "@/lib/supabase/client";
 
 const pageNames: { [key: string]: string } = {
   "/admin": "Dashboard",
@@ -40,6 +44,17 @@ const pageNames: { [key: string]: string } = {
 
 export function AdminLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
+  const router = useRouter();
+  const supabase = createClient();
+
+  const handleLogout = async () => {
+    try {
+      await supabase.auth.signOut();
+      router.push("/login");
+    } catch (error) {
+      console.error("Logout failed:", error);
+    }
+  };
 
   return (
     <div className="flex min-h-screen w-full flex-col bg-muted/40">
@@ -82,7 +97,7 @@ export function AdminLayout({ children }: { children: React.ReactNode }) {
             <DropdownMenuItem>Settings</DropdownMenuItem>
             <DropdownMenuItem>Support</DropdownMenuItem>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>Logout</DropdownMenuItem>
+            <DropdownMenuItem onClick={handleLogout}>Logout</DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       </header>
@@ -116,7 +131,7 @@ export function AdminLayout({ children }: { children: React.ReactNode }) {
                         : "text-muted-foreground"
                     } transition-colors hover:text-foreground md:h-8 md:w-8`}
                   >
-                    <DollarSignIcon className="h-5 w-5" />
+                    <IndianRupeeIcon className="h-5 w-5" />
                     <span className="sr-only">Cashier</span>
                   </Link>
                 </TooltipTrigger>

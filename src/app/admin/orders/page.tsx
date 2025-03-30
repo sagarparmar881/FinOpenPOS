@@ -278,10 +278,6 @@ export default function OrdersPage() {
               </DropdownMenuContent>
             </DropdownMenu>
           </div>
-          <Button size="sm" onClick={() => setShowNewOrderDialog(true)}>
-            <PlusCircle className="w-4 h-4 mr-2" />
-            Create Order
-          </Button>
         </div>
       </CardHeader>
       <CardContent className="p-0">
@@ -302,7 +298,7 @@ export default function OrdersPage() {
                 <TableRow key={order.id}>
                   <TableCell>{order.id}</TableCell>
                   <TableCell>{order.customer.name}</TableCell>
-                  <TableCell>${order.total_amount.toFixed(2)}</TableCell>
+                  <TableCell>₹{order.total_amount.toFixed(2)}</TableCell>
                   <TableCell>{order.status}</TableCell>
                   <TableCell>{order.created_at}</TableCell>
                   <TableCell>

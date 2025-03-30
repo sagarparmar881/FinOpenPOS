@@ -99,7 +99,7 @@ export default function Page() {
             <DollarSignIcon className="w-4 h-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">${totalRevenue.toFixed(2)}</div>
+            <div className="text-2xl font-bold">₹{totalRevenue.toFixed(2)}</div>
           </CardContent>
         </Card>
         <Card>
@@ -110,7 +110,7 @@ export default function Page() {
             <DollarSignIcon className="w-4 h-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">${totalExpenses.toFixed(2)}</div>
+            <div className="text-2xl font-bold">₹{totalExpenses.toFixed(2)}</div>
           </CardContent>
         </Card>
         <Card>
@@ -119,11 +119,11 @@ export default function Page() {
             <DollarSignIcon className="w-4 h-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">${totalProfit.toFixed(2)}</div>
+            <div className="text-2xl font-bold">₹{totalProfit.toFixed(2)}</div>
           </CardContent>
         </Card>
       </div>
-      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+      <div className="grid gap-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-2">
         <Card>
           <CardHeader className="flex flex-row items-center justify-between pb-2">
             <CardTitle className="text-sm font-medium">
@@ -234,9 +234,8 @@ function DollarSignIcon(props: any) {
       strokeLinecap="round"
       strokeLinejoin="round"
     >
-      <line x1="12" x2="12" y1="2" y2="22" />
-      <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
-    </svg>
+      <path d="M6 3h12"/><path d="M6 8h12"/><path d="m6 13 8.5 8"/><path d="M6 13h3"/><path d="M9 13c6.667 0 6.667-10 0-10"/>
+      </svg>
   );
 }
 
