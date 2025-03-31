@@ -99,7 +99,9 @@ export default function Page() {
             <DollarSignIcon className="w-4 h-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">₹{totalRevenue.toFixed(2)}</div>
+            <div className="text-2xl font-bold">
+              ₹{totalRevenue.toLocaleString("en-IN", { minimumFractionDigits: 2 })}
+            </div>
           </CardContent>
         </Card>
         <Card>
@@ -110,7 +112,9 @@ export default function Page() {
             <DollarSignIcon className="w-4 h-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">₹{totalExpenses.toFixed(2)}</div>
+            <div className="text-2xl font-bold">
+              ₹{totalExpenses.toLocaleString("en-IN", { minimumFractionDigits: 2 })}
+            </div>
           </CardContent>
         </Card>
         <Card>
@@ -119,7 +123,9 @@ export default function Page() {
             <DollarSignIcon className="w-4 h-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">₹{totalProfit.toFixed(2)}</div>
+            <div className="text-2xl font-bold">
+              ₹{totalProfit.toLocaleString("en-IN", { minimumFractionDigits: 2 })}
+              </div>
           </CardContent>
         </Card>
       </div>

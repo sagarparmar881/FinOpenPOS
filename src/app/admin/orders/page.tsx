@@ -299,7 +299,7 @@ export default function OrdersPage() {
                 <TableRow key={order.id}>
                   <TableCell>{order.id}</TableCell>
                   <TableCell>{order.customer.name}</TableCell>
-                  <TableCell>₹{order.total_amount.toFixed(2)}</TableCell>
+                  <TableCell>₹{order.total_amount.toLocaleString("en-IN", { minimumFractionDigits: 2 })}</TableCell>
                   <TableCell>{order.status}</TableCell>
                   <TableCell>
                     {moment.utc(order.created_at).tz("Asia/Kolkata").format("DD, MMMM YYYY | hh:mm A")}
