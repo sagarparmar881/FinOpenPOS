@@ -50,6 +50,7 @@ import {
   DropdownMenuCheckboxItem,
 } from "@/components/ui/dropdown-menu";
 import Link from "next/link";
+import moment from "moment-timezone";
 
 type Order = {
   id: number;
@@ -300,7 +301,9 @@ export default function OrdersPage() {
                   <TableCell>{order.customer.name}</TableCell>
                   <TableCell>₹{order.total_amount.toFixed(2)}</TableCell>
                   <TableCell>{order.status}</TableCell>
-                  <TableCell>{order.created_at}</TableCell>
+                  <TableCell>
+                    {moment.utc(order.created_at).tz("Asia/Kolkata").format("DD, MMMM YYYY | hh:mm A")}
+                  </TableCell>
                   <TableCell>
                     <div className="flex items-center gap-2">
                       <Button
@@ -328,12 +331,12 @@ export default function OrdersPage() {
                         <Trash2 className="w-4 h-4" />
                         <span className="sr-only">Delete</span>
                       </Button>
-                      <Link href={`/admin/orders/${order.id}`} prefetch={false}>
-                        <Button size="icon" variant="ghost">
+                      {/* <Link href={`/admin/orders/${order.id}`} prefetch={false}> */}
+                        <Button size="icon" variant="ghost" disabled>
                           <EyeIcon className="w-4 h-4" />
                           <span className="sr-only">View</span>
                         </Button>
-                      </Link>
+                      {/* </Link> */}
                     </div>
                   </TableCell>
                 </TableRow>

@@ -59,6 +59,16 @@ export async function DELETE(
     return NextResponse.json({ error: orderItemsError.message }, { status: 500 })
   }
 
+    // First, delete related order_items
+    const { error: transactionsError } = await supabase
+    .from('transactions')
+    .delete()
+    .eq('order_id', orderId)
+
+  if (transactionsError) {
+    return NextResponse.json({ error: transactionsError.message }, { status: 500 })
+  }
+
   // Then, delete the order
   const { error: orderError } = await supabase
     .from('orders')
